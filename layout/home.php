@@ -58,6 +58,92 @@
 	<![endif]-->
 
 	</head>
+	<style media="screen">
+	input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin: 0;
+}
+.button7 {
+    background: #f1bb4e;
+    background-image: -webkit-linear-gradient(top, #f1bb4e, #efaa2e);
+    background-image: -moz-linear-gradient(top, #f1bb4e, #efaa2e);
+    background-image: -ms-linear-gradient(top, #f1bb4e, #efaa2e);
+    background-image: -o-linear-gradient(top, #f1bb4e, #efaa2e);
+    background-image: linear-gradient(top, #f1bb4e, #efaa2e);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    font-family: serif;
+    color: #ffffff;
+    border: 0px;
+    padding: 4px 20px 4px 20px;
+    text-decoration: none;
+}
+
+
+.button7:hover {
+	background: #f59a25;
+	background-image: -webkit-linear-gradient(top, #f59a25, #efaf45);
+	background-image: -moz-linear-gradient(top, #f59a25, #efaf45);
+	background-image: -ms-linear-gradient(top, #f59a25, #efaf45);
+	background-image: -o-linear-gradient(top, #f59a25, #efaf45);
+	background-image: linear-gradient(top, #f59a25, #efaf45);
+	text-decoration: none;
+}
+/*.button7{
+ display:inline-block;
+ padding:0.3em 1.2em;
+ margin:0 0.3em 0.3em 0;
+ border-radius:2em;
+ box-sizing: border-box;
+ text-decoration:none;
+ font-family:'Roboto',sans-serif;
+ font-weight:300;
+ color:#FFFFFF;
+ background-color:#4eb5f1;
+ text-align:center;
+ transition: all 0.2s;
+}
+.button7:hover{
+ background-color:#4095c6;
+}
+@media all and (max-width:30em){
+ .button7{
+  display:block;
+  margin:0.2em auto;
+ }
+}
+.button7{
+ display:inline-block;
+ padding:0.7em 1.7em;
+ margin:0 0.3em 0.3em 0;
+ border-radius:0.2em;
+ box-sizing: border-box;
+ text-decoration:none;
+ font-family:'Roboto',sans-serif;
+ font-weight:400;
+ color:#FFFFFF;
+ background-color:#3369ff;
+ box-shadow:inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+ text-align:center;
+ position:relative;
+}
+.button7:active{
+ box-shadow:inset 0 0.6em 2em -0.3em rgba(0,0,0,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
+}
+@media all and (max-width:30em){
+ .button7{
+  display:block;
+  margin:0.4em auto;
+ }
+}*/
+.button7:focus{
+	outline: none;
+}
+	</style>
 	<body>
 
 	<div class="gtco-loader"></div>
@@ -177,7 +263,7 @@
         $res = mysqli_query($con,$qr);
         while($row=mysqli_fetch_assoc($res)){
          echo "<div class='col-lg-4 col-md-4 col-sm-6'><input type='text' class='cat_id' hidden value='$row[food_category_id]'>
-          <a href='#$row[food_category_name]' data-toggle='modal' target='#$row[food_category_name]' class='fh5co-card-item'>
+          <a href='#$row[food_category_id]' data-toggle='modal' target='#$row[food_category_name]' class='fh5co-card-item'>
             <figure>
               <div class='overlay'><i class='ti-plus'></i></div><center>
               <img src='../FoodCatPic/$row[food_category_image]' alt='Image' class='img-responsive'></center>
@@ -189,14 +275,14 @@
             </div>
           </a>
         </div>
-				<div id='$row[food_category_name]' class='modal fade' role='dialog'>
+				<div id='$row[food_category_id]' class='modal fade' role='dialog'>
   <div class='modal-dialog'>
 
     <!-- Modal content-->
     <div class='modal-content'>
       <div class='modal-header'>
         <button type='button' class='close' data-dismiss='modal'>&times;</button>
-        <h4 class='modal-title'>Modal Header</h4>
+        <h4 class='modal-title'>$row[food_category_name]</h4>
       </div>
       <div class='modal-body'>
         <p>
@@ -204,13 +290,13 @@
 				$query = "SELECT * FROM food_name WHERE food_category_id = $row[food_category_id]";
 				$result2 = mysqli_query($con,$query);
 				while ($rw=mysqli_fetch_assoc($result2)) {
-					echo "<div class='row'><div class='col-lg-6'>$rw[food_name]</div><div class='col-lg-6' style='align-content:right;'><button>ADD</button></div></div>";
+					echo "<div class='container' style='width:100%'><div class='row' style='margin:10px 0px;font-family:cursive;'><div class='col-lg-6 col-sm-3'>$rw[food_name]</div><div class='col-lg-2 col-sm-1'>Rs. $rw[food_price]</div><div class='col-lg-2'><input type='number' class='form-control' style='height:30px;width:100%;'></div><div class='col-lg-2'><button class='button7'>ADD</button></div></div></div>";
 				}
 				echo"</p>
       </div>
-      <!---<div class='modal-footer'>
+    	<div class='modal-footer'>
         <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
-      </div>--->
+      </div>
     </div>
 
   </div>
