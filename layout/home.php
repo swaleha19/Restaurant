@@ -177,7 +177,7 @@
         $res = mysqli_query($con,$qr);
         while($row=mysqli_fetch_assoc($res)){
          echo "<div class='col-lg-4 col-md-4 col-sm-6'><input type='text' class='cat_id' hidden value='$row[food_category_id]'>
-          <a href='../FoodCatPic/$row[food_category_image]' class='fh5co-card-item image-popup'>
+          <a href='#$row[food_category_name]' data-toggle='modal' target='#$row[food_category_name]' class='fh5co-card-item'>
             <figure>
               <div class='overlay'><i class='ti-plus'></i></div><center>
               <img src='../FoodCatPic/$row[food_category_image]' alt='Image' class='img-responsive'></center>
@@ -188,7 +188,33 @@
               <p><span class='price cursive-font'></span></p>
             </div>
           </a>
-        </div>";
+        </div>
+				<div id='$row[food_category_name]' class='modal fade' role='dialog'>
+  <div class='modal-dialog'>
+
+    <!-- Modal content-->
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <button type='button' class='close' data-dismiss='modal'>&times;</button>
+        <h4 class='modal-title'>Modal Header</h4>
+      </div>
+      <div class='modal-body'>
+        <p>
+				";
+				$query = "SELECT * FROM food_name WHERE food_category_id = $row[food_category_id]";
+				$result2 = mysqli_query($con,$query);
+				while ($rw=mysqli_fetch_assoc($result2)) {
+					echo "<div class='row'><div class='col-lg-6'>$rw[food_name]</div><div class='col-lg-6' style='align-content:right;'><button>ADD</button></div></div>";
+				}
+				echo"</p>
+      </div>
+      <!---<div class='modal-footer'>
+        <button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+      </div>--->
+    </div>
+
+  </div>
+</div>";
       }
         ?>
 
