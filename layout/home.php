@@ -1,3 +1,4 @@
+<?php require 'session.php'; ?>
 <!DOCTYPE HTML>
 <!--
 	Aesthetic by gettemplates.co
@@ -93,55 +94,15 @@ input[type=number]::-webkit-outer-spin-button {
 	background-image: linear-gradient(top, #f59a25, #efaf45);
 	text-decoration: none;
 }
-/*.button7{
- display:inline-block;
- padding:0.3em 1.2em;
- margin:0 0.3em 0.3em 0;
- border-radius:2em;
- box-sizing: border-box;
- text-decoration:none;
- font-family:'Roboto',sans-serif;
- font-weight:300;
- color:#FFFFFF;
- background-color:#4eb5f1;
- text-align:center;
- transition: all 0.2s;
-}
-.button7:hover{
- background-color:#4095c6;
-}
-@media all and (max-width:30em){
- .button7{
-  display:block;
-  margin:0.2em auto;
- }
-}
-.button7{
- display:inline-block;
- padding:0.7em 1.7em;
- margin:0 0.3em 0.3em 0;
- border-radius:0.2em;
- box-sizing: border-box;
- text-decoration:none;
- font-family:'Roboto',sans-serif;
- font-weight:400;
- color:#FFFFFF;
- background-color:#3369ff;
- box-shadow:inset 0 -0.6em 1em -0.35em rgba(0,0,0,0.17),inset 0 0.6em 2em -0.3em rgba(255,255,255,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
- text-align:center;
- position:relative;
-}
-.button7:active{
- box-shadow:inset 0 0.6em 2em -0.3em rgba(0,0,0,0.15),inset 0 0 0em 0.05em rgba(255,255,255,0.12);
-}
-@media all and (max-width:30em){
- .button7{
-  display:block;
-  margin:0.4em auto;
- }
-}*/
 .button7:focus{
 	outline: none;
+}
+.form-control{
+	height: 36px;
+	width:100%;
+}
+.warning{
+	color:red;
 }
 	</style>
 	<body>
@@ -174,13 +135,125 @@ input[type=number]::-webkit-outer-spin-button {
 							</ul>
 						</li>
 						<li><a href="contact.html">Contact</a></li>
-						<li class="btn-cta"><a href="#"><span>Reservation</span></a></li>
+						<?php if (!isset($_SESSION['user_id'])) { ?>
+						<li class="btn-cta"><a href="#login" data-toggle="modal"><span>Login</span></a></li>
+						<li class="btn-cta"><a href="#register" data-toggle="modal"><span>Register</span></a></li>
+					<?php }else{ ?>
+						<li class="btn-cta"><a href="api/logout.php"><span>Logout</span></a></li>
+						<?php } ?>
 					</ul>
 				</div>
 			</div>
 
 		</div>
 	</nav>
+
+
+		<div id='login' class='modal fade' role='dialog'>
+		<div class='modal-dialog'>
+
+		<!-- Modal content-->
+		<div class='modal-content'>
+		<div class='modal-header'>
+		<button type='button' class='close' data-dismiss='modal'>&times;</button>
+		<h4 class='modal-title'>LOGIN</h4>
+		</div>
+		<div class='modal-body'>
+		<p>
+			<div class="container" style="width:100%">
+				<form id="lgn_form">
+				<p class='warning' id='invalid' hidden>Invalid Username or Password</p>
+				<div class="row">
+					Username or Email
+				</div><br>
+				<div class="row">
+					<input type="text" id='u_login' class='form-control' name="uname" placeholder="Username or Email">
+				</div><br>
+				<div class="row">
+					Password
+				</div><br>
+				<div class="row">
+					<input type="text" id="u_pass" class='form-control' name="pass" placeholder="Password">
+				</div><br>
+				<div class="row">
+					<div class="col-lg-2 col-sm-2">
+						<button type="button" class="btn" id="lgn" name="button">Login</button>
+					</div>
+				</div>
+			</form>
+			</div>
+		</p>
+		</div>
+		<div class='modal-footer'>
+		<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+		</div>
+		</div>
+
+		</div>
+		</div>
+
+		<div id='register' class='modal fade' role='dialog'>
+		<div class='modal-dialog'>
+
+		<!-- Modal content-->
+		<div class='modal-content'>
+		<div class='modal-header'>
+		<button type='button' class='close' data-dismiss='modal'>&times;</button>
+		<h4 class='modal-title'>REGISTER</h4>
+		</div>
+		<div class='modal-body'>
+			<form id="form">
+				<p>
+					<div class="container" style="width:100%">
+						<div class="row">
+							Name
+						</div><br>
+						<div class="row">
+							<input type="text" class='form-control' id="name" name="name" value="">
+						</div><br>
+						<div class="row">
+							Username
+						</div><br>
+						<div class="row">
+							<input type="text" class='form-control' id="uname" name="uname" value=""><p id='unamenotexists' hidden class='warning'></p>
+						</div><br>
+						<div class="row">
+							Email
+						</div><br>
+						<div class="row">
+							<input type="text" class='form-control' name="email" id="email" value=""><p id='emailalreadyregisered' hidden class='warning'></p>
+						</div><br>
+						<div class="row">
+							Password
+						</div><br>
+						<div class="row">
+							<input type="text" class='form-control' name="pass" value="" id="pass">
+						</div><br><div class="row">
+							Confirm Password
+						</div><br>
+						<div class="row">
+							<input type="text" class='form-control' name="cpass" value="" id="cpass"><p id='passnotmatch' hidden class='warning'></p>
+						</div><br><div class="row">
+							Mobile Number
+						</div><br>
+						<div class="row">
+							<input type="text" class='form-control' name="mobile" id="mobile" value=""><p class='warning' id='mobileregistered' hidden></p>
+						</div><br>
+						<div class="row">
+							<button type="button" id="reg" class="btn" name="button">Register</button>
+						</div>
+					</div>
+			</form>
+		</p>
+		</div>
+		<div class='modal-footer'>
+		<button type='button' class='btn btn-default' data-dismiss='modal'>Close</button>
+		</div>
+		</div>
+
+		</div>
+		 </div>
+
 
 	<header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image:url('../FoodCatPic/sugary-restaurant-meals-ocharleys-babybackribs-500x375.jpg')">
 		<div class="overlay"></div>
@@ -290,7 +363,7 @@ input[type=number]::-webkit-outer-spin-button {
 				$query = "SELECT * FROM food_name WHERE food_category_id = $row[food_category_id]";
 				$result2 = mysqli_query($con,$query);
 				while ($rw=mysqli_fetch_assoc($result2)) {
-					echo "<div class='container' style='width:100%'><div class='row' style='margin:10px 0px;font-family:cursive;'><div class='col-lg-6 col-sm-3'>$rw[food_name]</div><div class='col-lg-2 col-sm-1'>Rs. $rw[food_price]</div><div class='col-lg-2'><input type='number' class='form-control' style='height:30px;width:100%;'></div><div class='col-lg-2'><button class='button7'>ADD</button></div></div></div>";
+					echo "<div class='container' style='width:100%'><div class='row' style='margin:10px 0px;font-family:cursive;'><div class='col-lg-6 col-sm-3'>$rw[food_name]</div><div class='col-lg-2 col-sm-1'>Rs. $rw[food_price]</div><div class='col-lg-2'><input type='number' class='form-control' style='height:30px;width:100%;' id='QF$rw[food_id]'></div><div class='col-lg-2'><button class='button7 add_product' id='F$rw[food_id]'>ADD</button></div></div></div>";
 				}
 				echo"</p>
       </div>
@@ -509,4 +582,52 @@ input[type=number]::-webkit-outer-spin-button {
 	<script src="../js/main.js"></script>
 
 	</body>
+	<script type="text/javascript">
+		$("#reg").click(function(){
+			$.ajax({
+				type:"POST",
+				url:"api/register.php",
+				data: new FormData(document.getElementById('form')),
+				processData:false,
+				cache:false,
+				contentType:false,
+				dataType:'json'
+			}).done(function(data){
+				if (data.status == 'success') {
+					alert("Registered Successfully");
+				}	else {
+					alert("Error occured. Try again later.");
+				}
+			});
+		});
+		$("#lgn").click(function(){
+			$("#invalid").hide();
+			$.ajax({
+				type:"POST",
+				url:"api/login.php",
+				data: new FormData(document.getElementById('lgn_form')),
+				processData:false,
+				cache:false,
+				contentType:false,
+				dataType:'json'
+			}).done(function(data){
+				if (data.status == 'success') {
+					window.location="home.php";
+				}	else {
+					$("#invalid").show();
+				}
+			});
+		});
+		$(document).on("click",".add_product",function(){
+			var id = this.id;
+			var x=0;
+			for (var i = 1; i < id.length; i++) {
+				x=x*10+parseInt(id[i]);
+			}
+			var quan = $("#Q"+id).val();
+			$.post("api/add_product_to_cart.php",{ id:x , quantity:quan },function(data){				
+					alert(data);
+			});
+		});
+	</script>
 </html>
