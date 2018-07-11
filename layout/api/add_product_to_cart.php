@@ -34,11 +34,24 @@
   $cartid = $_SESSION['cart_id'];
   $foodid = $_POST['id'];
   $quantity = $_POST['quantity'];
-  $query = "INSERT INTO cart_details VALUES ('$cartid' , '$foodid' , '$quantity' , '0')";
-  $execute = mysqli_query($con , $query);
-  if($execute){
-    echo 'success';
+  $query = "SELECT * FROM cart_details WHERE cart_id = '$cartid' and food_id='$foodid'";
+  $exec = mysqli_query($con , $query);
+  if($row = mysqli_fetch_assoc($exec)){
+    $quantity = $quantity + $row['quantity'];
+    $upd_query = "UPDATE cart_details SET quantity='$quantity' WHERE id='$row[id]'";
+    $execute = mysqli_query($con , $upd_query);
+    if($execute){
+      echo 'success';
+    } else {
+      echo "cart not updated";
+    }
   } else {
-    echo "cart not updated";
+    $query = "INSERT INTO cart_details VALUES (NULL , '$cartid' , '$foodid' , '$quantity' , '0')";
+    $execute = mysqli_query($con , $query);
+    if($execute){
+      echo 'success';
+    } else {
+      echo "cart not updated";
+    }
   }
  ?>
