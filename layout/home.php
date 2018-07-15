@@ -127,7 +127,7 @@ input[type=number]::-webkit-outer-spin-button {
 					<ul>
 						<li><a href="menu.html">Menu</a></li>
 						<li class="has-dropdown">
-							<a href="services.html">Services</a>
+							<a href="cart.php">Cart</a>
 							<ul class="dropdown">
 								<li><a href="#">Food Catering</a></li>
 								<li><a href="#">Wedding Celebration</a></li>
@@ -625,7 +625,7 @@ input[type=number]::-webkit-outer-spin-button {
 				x=x*10+parseInt(id[i]);
 			}
 			var quan = $("#Q"+id).val();
-			$.post("api/add_product_to_cart.php",{ id:x , quantity:quan },function(data){				
+			$.post("api/add_product_to_cart.php",{ id:x , quantity:quan },function(data){
 					alert(data);
 			});
 		});

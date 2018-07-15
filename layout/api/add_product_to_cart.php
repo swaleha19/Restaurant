@@ -16,7 +16,7 @@
     $result = mysqli_query($con,$qr);
     $row=mysqli_fetch_assoc($result);
     if ($row['max']!=NULL) {
-      $_SESSION['cart_id'] = $row['cart_id'];
+      $_SESSION['cart_id'] = $row['max'];
     } else {
       $qr = "INSERT INTO user_cart VALUES (NULL , $mid_query , '0')";
       $result = mysqli_query($con,$qr);
