@@ -125,9 +125,9 @@ input[type=number]::-webkit-outer-spin-button {
 				</div>
 				<div class="col-xs-8 text-right menu-1">
 					<ul>
-						<li><a href="menu.html">Menu</a></li>
+						<li><a href="cart.php">Cart</a></li>
 						<li class="has-dropdown">
-							<a href="cart.php">Cart</a>
+							<a href="#">Services</a>
 							<ul class="dropdown">
 								<li><a href="#">Food Catering</a></li>
 								<li><a href="#">Wedding Celebration</a></li>

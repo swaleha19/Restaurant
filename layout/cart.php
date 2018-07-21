@@ -79,13 +79,13 @@
 
 			<div class="row">
 				<div class="col-sm-4 col-xs-12">
-					<div id="gtco-logo"><a href="index.html">Savory <em>.</em></a></div>
+					<div id="gtco-logo"><a href="home.php">Savory <em>.</em></a></div>
 				</div>
 				<div class="col-xs-8 text-right menu-1">
 					<ul>
-						<li><a href="menu.html">Menu</a></li>
-						<li class="has-dropdown active">
-							<a href="services.html">Services</a>
+						<li class="active"><a href="cart.php">Cart</a></li>
+						<li class="has-dropdown">
+							<a href="services.php">Services</a>
 							<ul class="dropdown">
 								<li><a href="#">Food Catering</a></li>
 								<li><a href="#">Wedding Celebration</a></li>
@@ -134,34 +134,34 @@
   			</div>
         <div class='row cursive-font' style='color:white; font-size:x-large;'>
           <div class='col-sm-4 col-lg-8' >
-        <?php
-          include 'api/connection.php';
-          $qr="SELECT c.quantity,f.food_name,f.food_price,fc.food_category_image as image FROM `cart_details` c
-right outer join
-(SELECT * FROM food_name)f
-ON (c.cart_id='$_SESSION[cart_id]' AND c.food_id=f.food_id)
-RIGHT OUTER JOIN
-(SELECT * FROM food_category WHERE food_category_id IN(SELECT food_category_id FROM food_name WHERE food_id IN(SELECT food_id FROM cart_details WHERE cart_id='1')))fc
-ON (c.cart_id='$_SESSION[cart_id]' AND c.food_id=f.food_id AND fc.food_category_id=f.food_category_id)";
-          $result = mysqli_query($con,$qr);
-          $tot=0;
-          $itot=0;
-          while ($row=mysqli_fetch_assoc($result)) {
-            $itot=$row['food_price']*$row['quantity'];
-            echo "
-            <div class='row mt20'>
-            <div class='col-lg-2 col-sm-1 ' > <img src='../FoodCatPic/$row[image]' alt='image' width='100%'> </div>
-            <div class='col-lg-4 col-sm-3 ' >$row[food_name]</div>
-            <div class='col-lg-2 col-sm-1 ' style='padding:0;'>Rs.$row[food_price]</div>
-            <div class='col-lg-1 col-sm-1 ' style='padding:0;'>x</div>
-            <div class='col-lg-1 col-sm-1 ' style='padding:0;' >$row[quantity]</div>
-            <div class='col-lg-2 col-sm-2'>
-            =&nbsp;&nbsp;$itot
-            </div>
-            </div>
-            ";
-            $tot+=$itot;
-          }
+        <?php if (isset($_SESSION['cart_id'])) {
+					include 'api/connection.php';
+					$qr="SELECT c.quantity,f.food_name,f.food_price,fc.food_category_image as image FROM `cart_details` c
+					right outer join
+					(SELECT * FROM food_name)f
+					ON (c.cart_id='$_SESSION[cart_id]' AND c.food_id=f.food_id)
+					RIGHT OUTER JOIN
+					(SELECT * FROM food_category WHERE food_category_id IN(SELECT food_category_id FROM food_name WHERE food_id IN(SELECT food_id FROM cart_details WHERE cart_id='1')))fc
+					ON (c.cart_id='$_SESSION[cart_id]' AND c.food_id=f.food_id AND fc.food_category_id=f.food_category_id)";
+					$result = mysqli_query($con,$qr);
+					$tot=0;
+					$itot=0;
+					while ($row=mysqli_fetch_assoc($result)) {
+						$itot=$row['food_price']*$row['quantity'];
+						echo "
+						<div class='row mt20'>
+						<div class='col-lg-2 col-sm-1 ' > <img src='../FoodCatPic/$row[image]' alt='image' width='100%'> </div>
+						<div class='col-lg-4 col-sm-3 ' >$row[food_name]</div>
+						<div class='col-lg-2 col-sm-1 ' style='padding:0;'>Rs.$row[food_price]</div>
+						<div class='col-lg-1 col-sm-1 ' style='padding:0;'>x</div>
+						<div class='col-lg-1 col-sm-1 ' style='padding:0;' >$row[quantity]</div>
+						<div class='col-lg-2 col-sm-2'>
+						=&nbsp;&nbsp;$itot
+						</div>
+						</div>
+						";
+						$tot+=$itot;
+					}
          ?>
 
 			    </div>
@@ -170,9 +170,17 @@ ON (c.cart_id='$_SESSION[cart_id]' AND c.food_id=f.food_id AND fc.food_category_
 							TOTAL
 						</div>
 						<div class='col-lg-6 col-sm-2' style='text-align:right;'>
-							<?php echo"$tot"; ?>
+							<?php echo"$tot";?>
 						</div>
 					</div>
+					<?php
+				} else {?>
+						<div class='col-lg-6 col-sm-2'>
+							No items recognised
+						</div>
+						<div class='col-lg-6 col-sm-2'>
+							<a href="home.php" style="color:white"> Click Here to go to menu </a><?php } ?>
+						</div>
 			  </div>
 			</div>
 <!--
