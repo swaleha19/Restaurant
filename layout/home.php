@@ -173,7 +173,7 @@ input[type=number]::-webkit-outer-spin-button {
 					Password
 				</div><br>
 				<div class="row">
-					<input type="text" id="u_pass" class='form-control' name="pass" placeholder="Password">
+					<input type="password" id="u_pass" class='form-control' name="pass" placeholder="Password">
 				</div><br>
 				<div class="row">
 					<div class="col-lg-2 col-sm-2">
@@ -227,17 +227,17 @@ input[type=number]::-webkit-outer-spin-button {
 							Password
 						</div><br>
 						<div class="row">
-							<input type="text" class='form-control' name="pass" value="" id="pass">
+							<input type="password" class='form-control' name="pass" value="" id="pass">
 						</div><br><div class="row">
 							Confirm Password
 						</div><br>
 						<div class="row">
-							<input type="text" class='form-control' name="cpass" value="" id="cpass"><p id='passnotmatch' hidden class='warning'></p>
+							<input type="password" class='form-control' name="cpass" value="" id="cpass"><p id='passnotmatch' hidden class='warning'></p>
 						</div><br><div class="row">
 							Mobile Number
 						</div><br>
 						<div class="row">
-							<input type="text" class='form-control' name="mobile" id="mobile" value=""><p class='warning' id='mobileregistered' hidden></p>
+							<input type="number" class='form-control' name="mobile" id="mobile" value=""><p class='warning' id='mobileregistered' hidden></p>
 						</div><br>
 						<div class="row">
 							<button type="button" id="reg" class="btn" name="button">Register</button>

@@ -65,6 +65,50 @@
 		.mt20{
 			margin:30px;
 		}
+	input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	margin: 0;
+}
+.button7 {
+    background: #31bb4e;
+    background-image: -webkit-linear-gradient(top, #31bb4e, #3faa2e);
+    background-image: -moz-linear-gradient(top, #31bb4e, #3faa2e);
+    background-image: -ms-linear-gradient(top, #31bb4e, #3faa2e);
+    background-image: -o-linear-gradient(top, #31bb4e, #3faa2e);
+    background-image: linear-gradient(top, #31bb4e, #3faa2e);
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+		font-size: x-large;
+    border-radius: 28px;
+    color: #ffffff;
+    border: 0px;
+    padding: 4px 20px 4px 20px;
+    text-decoration: none;
+}
+
+
+.button7:hover {
+	background: #259a25;
+	background-image: -webkit-linear-gradient(top, #259a25, #afaf45);
+	background-image: -moz-linear-gradient(top, #259a25, #afaf45);
+	background-image: -ms-linear-gradient(top, #259a25, #afaf45);
+	background-image: -o-linear-gradient(top, #259a25, #afaf45);
+	background-image: linear-gradient(top, #259a25, #afaf45);
+	text-decoration: none;
+}
+.button7:focus{
+	outline: none;
+}
+.form-control{
+	height: 36px;
+	width:100%;
+}
+.warning{
+	color:red;
+}
 	</style>
 	<body>
 
@@ -150,12 +194,12 @@
 						$itot=$row['food_price']*$row['quantity'];
 						echo "
 						<div class='row mt20'>
-						<div class='col-lg-2 col-sm-1 ' > <img src='../FoodCatPic/$row[image]' alt='image' width='100%'> </div>
-						<div class='col-lg-4 col-sm-3 ' >$row[food_name]</div>
-						<div class='col-lg-2 col-sm-1 ' style='padding:0;'>Rs.$row[food_price]</div>
-						<div class='col-lg-1 col-sm-1 ' style='padding:0;'>x</div>
-						<div class='col-lg-1 col-sm-1 ' style='padding:0;' >$row[quantity]</div>
-						<div class='col-lg-2 col-sm-2'>
+						<div class='col-lg-2 col-sm-0 col-xs-2 ' > <img src='../FoodCatPic/$row[image]' alt='image' width='100%'> </div>
+						<div class='col-lg-4 col-sm-3 col-xs-3 ' >$row[food_name]</div>
+						<div class='col-lg-2 col-sm-1 col-xs-2 ' style='padding:0;'>Rs.$row[food_price]</div>
+						<div class='col-lg-1 col-sm-1 col-xs-1 ' style='padding:0;'>x</div>
+						<div class='col-lg-1 col-sm-1 col-xs-1 ' style='padding:0;' >$row[quantity]</div>
+						<div class='col-lg-2 col-sm-2 col-xs-2'>
 						=&nbsp;&nbsp;$itot
 						</div>
 						</div>
@@ -172,6 +216,8 @@
 						<div class='col-lg-6 col-sm-2' style='text-align:right;'>
 							<?php echo"$tot";?>
 						</div>
+						<br><br><br>
+						<input type="button" name="" value="Complete Order" class="button7" style="float:right;">
 					</div>
 					<?php
 				} else {?>
@@ -179,9 +225,10 @@
 							No items recognised
 						</div>
 						<div class='col-lg-6 col-sm-2'>
-							<a href="home.php" style="color:white"> Click Here to go to menu </a><?php } ?>
+							<a href="home.php" style="color:white"> Click Here to go to menu </a>
 						</div>
 			  </div>
+			<?php } ?>
 			</div>
 <!--
 			<div class="row">
