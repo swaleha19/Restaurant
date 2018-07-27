@@ -125,9 +125,9 @@ input[type=number]::-webkit-outer-spin-button {
 				</div>
 				<div class="col-xs-8 text-right menu-1">
 					<ul>
-						<li><a href="menu.html">Menu</a></li>
+						<li><a href="cart.php">Cart</a></li>
 						<li class="has-dropdown">
-							<a href="services.html">Services</a>
+							<a href="#">Services</a>
 							<ul class="dropdown">
 								<li><a href="#">Food Catering</a></li>
 								<li><a href="#">Wedding Celebration</a></li>
@@ -173,7 +173,7 @@ input[type=number]::-webkit-outer-spin-button {
 					Password
 				</div><br>
 				<div class="row">
-					<input type="text" id="u_pass" class='form-control' name="pass" placeholder="Password">
+					<input type="password" id="u_pass" class='form-control' name="pass" placeholder="Password">
 				</div><br>
 				<div class="row">
 					<div class="col-lg-2 col-sm-2">
@@ -227,17 +227,17 @@ input[type=number]::-webkit-outer-spin-button {
 							Password
 						</div><br>
 						<div class="row">
-							<input type="text" class='form-control' name="pass" value="" id="pass">
+							<input type="password" class='form-control' name="pass" value="" id="pass">
 						</div><br><div class="row">
 							Confirm Password
 						</div><br>
 						<div class="row">
-							<input type="text" class='form-control' name="cpass" value="" id="cpass"><p id='passnotmatch' hidden class='warning'></p>
+							<input type="password" class='form-control' name="cpass" value="" id="cpass"><p id='passnotmatch' hidden class='warning'></p>
 						</div><br><div class="row">
 							Mobile Number
 						</div><br>
 						<div class="row">
-							<input type="text" class='form-control' name="mobile" id="mobile" value=""><p class='warning' id='mobileregistered' hidden></p>
+							<input type="number" class='form-control' name="mobile" id="mobile" value=""><p class='warning' id='mobileregistered' hidden></p>
 						</div><br>
 						<div class="row">
 							<button type="button" id="reg" class="btn" name="button">Register</button>
@@ -625,7 +625,7 @@ input[type=number]::-webkit-outer-spin-button {
 				x=x*10+parseInt(id[i]);
 			}
 			var quan = $("#Q"+id).val();
-			$.post("api/add_product_to_cart.php",{ id:x , quantity:quan },function(data){				
+			$.post("api/add_product_to_cart.php",{ id:x , quantity:quan },function(data){
 					alert(data);
 			});
 		});

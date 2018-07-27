@@ -9,6 +9,11 @@
   if ($row = mysqli_fetch_assoc($result)) {
     if ($row['user_userpassword']==$pass) {
       $_SESSION['user_id'] = $row['user_id'];
+      $query = "SELECT * FROM user_cart WHERE user_id='$row[user_id]' AND cart_del_status='0'";
+      $result = mysqli_query($con , $query);
+      if ($rw=mysqli_fetch_assoc($result)) {
+        $_SESSION['cart_id']=$rw['cart_id'];
+      }
       $_SESSION['user_name'] = $row['user_username'];
       $_SESSION['status'] = $row['user_status'];
       echo json_encode(array('status'=>'success'));
